@@ -13,7 +13,7 @@ branches:
         - master
 
 script:
-    - docker login azolotukhin.jfrog.io -u $DOCKER_USER -p $DOCKER_PASS
+    - echo $DOCKER_PASS | docker login azolotukhin.jfrog.io -u $DOCKER_USER --password-stdin
     - docker build -t azolotukhin.jfrog.io/docker/my-docker-image:latest .
 
 after_success:
