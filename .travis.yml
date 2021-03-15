@@ -1,0 +1,20 @@
+language: python
+os: linux
+
+python:
+    - "3.6"
+
+services:
+    - docker
+
+branches:
+    only:
+        - develop
+        - master
+
+script:
+    - docker build -t azolotukhin.jfrog.io/docker/my-docker-image:latest .
+
+after_success:
+    - docker login azolotukhin.jfrog.io -u $DOCKER_USER -p $DOCKER_PASS
+    - docker push azolotukhin.jfrog.io/docker/my-docker-image:latest
